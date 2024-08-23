@@ -1,0 +1,23 @@
+[
+  {
+    "productId": "d35623ee-bef6-42b2-8776-2f99f8bb4782",
+    "name": "Tenisice",
+    "price": 456.04,
+    "rating": 2.25,
+    "stockQuantity": 124834
+  },
+  {
+    "productId": "8ac1ac77-7358-425e-be16-0bdde9f02e59",
+    "name": "Majice",
+    "price": 899.05,
+    "rating": 3.56,
+    "stockQuantity": 799402
+  },
+  {
+    "productId": "1afc136b-4d9f-4e8e-aace-8e1df908a404",
+    "name": "Čarape",
+    "price": 264.37,
+    "rating": 3.23,
+    "stockQuantity": 842192
+  }
+]

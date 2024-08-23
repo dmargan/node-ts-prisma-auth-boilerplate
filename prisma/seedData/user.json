@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Davor Margan",
+    "email": "davor@mar-com.hr",
+    "photo": "default.jpg",
+    "role": "ADMIN",
+    "password": "$2a$10$5NfHXss2tOLW/Hkm69hC9.P4o7.IDvisGKpmVD4lI5VqeKRmeRGGy",
+    "passwordChangedAt": null,
+    "passwordResetToken": null,
+    "passwordResetExpires": null,
+    "active": true,
+    "createdAt": "2024-08-23T12:34:56Z",
+    "updatedAt": "2024-08-23T12:34:56Z"
+  },
+  {
+    "id": 2,
+    "name": "Toni Margan",
+    "email": "toni@mar-com.hr",
+    "photo": "default.jpg",
+    "role": "EDITOR",
+    "password": "$2a$10$v9d4D/cMSWx8kGy3QNMiMeLkHGtcVOKlhqPiRKWSt09rxfgJaU24e",
+    "passwordChangedAt": null,
+    "passwordResetToken": null,
+    "passwordResetExpires": null,
+    "active": true,
+    "createdAt": "2024-08-23T12:34:56Z",
+    "updatedAt": "2024-08-23T12:34:56Z"
+  },
+  {
+    "id": 3,
+    "name": "Antonela Gojević",
+    "email": "antonela@mar-com.hr",
+    "photo": "default.jpg",
+    "role": "USER",
+    "password": "$2a$10$bNwcBygH9G2ZU.4j8RlyUeAz9uUkUTcJBsB94X91YqvQ5FCuyNEF2",
+    "passwordChangedAt": null,
+    "passwordResetToken": null,
+    "passwordResetExpires": null,
+    "active": true,
+    "createdAt": "2024-08-23T12:34:56Z",
+    "updatedAt": "2024-08-23T12:34:56Z"
+  }
+]
