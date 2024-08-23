@@ -1,14 +1,28 @@
-Node.js API with user auth implemented using JWT.
+# Node.js API with JWT Authentication
 
-MySQL is used for the database.
+This project is a Node.js API that implements user authentication using JSON Web Tokens (JWT). It uses MySQL as the database and Prisma as the ORM.
 
-To run the project run:
+## Getting Started
 
-1. npm install
+To set up and run the project, follow these steps:
 
-2. add needed env variables
+### 1. Install Dependencies
 
-3. DATABASE INIT:
-   npx prisma generate
-   npx prisma migrate dev --name init-sql
-   npm run seed -> import dummy data
+First, install the required Node.js dependencies:
+
+```bash
+npm install
+```
+
+### 2. Set Up Environment Variables
+
+Create a .env file in the root of the project directory and add the required environment variables. Here’s an example .env file:
+
+```bash
+PORT=8000
+NODE_ENV=development
+DATABASE_URL=mysql://user:password@localhost:3306/yourdatabase
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=30d
+JWT_COOKIE_EXPIRES_IN=30
+```
