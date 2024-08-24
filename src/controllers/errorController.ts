@@ -2,7 +2,19 @@ import { Request, Response, NextFunction } from "express";
 import { fromError } from "zod-validation-error";
 import AppError from "../utils/appError";
 
-const sendErrorDev = (err: any, res: Response) => {
+export interface ErrorWithCode extends AppError {
+  code?: string;
+}
+
+export interface ErrorWithMeta extends AppError {
+  meta?: { target: string };
+}
+
+export interface GlobalError extends ErrorWithCode, ErrorWithMeta {
+  name: string;
+}
+
+const sendErrorDev = (err: AppError, res: Response) => {
   res.status(err.statusCode).json({
     status: err.status,
     error: err,
@@ -11,7 +23,7 @@ const sendErrorDev = (err: any, res: Response) => {
   });
 };
 
-const sendErrorProd = (err: any, res: Response) => {
+const sendErrorProd = (err: AppError, res: Response) => {
   //Programing or other unknown error (don't leak details to client)
   if (!err.isOperational) {
     console.error("ERROR!", err);
@@ -29,36 +41,36 @@ const sendErrorProd = (err: any, res: Response) => {
   });
 };
 
-const handleValidationErr = (err: any) => {
+const handleValidationErr = (err: GlobalError): AppError => {
   const validationErrorMessages = fromError(err);
   return new AppError(validationErrorMessages.toString(), 400);
 };
 
-const handleDuplicateFieldsDB = (err: any) => {
-  const [field, constraint] = (err.meta.target as string).split("_");
+const handleDuplicateFieldsDB = (err: ErrorWithMeta): AppError => {
+  const [field, constraint] = (err.meta?.target as string).split("_");
   const message = `${
     field.charAt(0).toUpperCase() + field.slice(1)
   } with this ${constraint} already exists!`;
   return new AppError(message, 400);
 };
 
-const handleInitDbErr = () => {
+const handleInitDbErr = (): AppError => {
   return new AppError(
     "Something went wrong. We couldn’t connect to the database. Please try again later.",
     500
   );
 };
 
-const handleJWTError = () => {
+const handleJWTError = (): AppError => {
   return new AppError("Invalid token. Please log in again.", 401);
 };
 
-const handleJWTExpired = () => {
+const handleJWTExpired = (): AppError => {
   return new AppError("Your token has expired. Please log in again.", 401);
 };
 
 const globalErrorHandler = (
-  err: any,
+  err: GlobalError,
   _req: Request,
   res: Response,
   _next: NextFunction
@@ -69,11 +81,11 @@ const globalErrorHandler = (
   err.status = err.status || "error";
 
   //FOR TESTING I SWITCH THIS TWO FUNCTIONS
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "development") {
     sendErrorDev(err, res);
   }
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "production") {
     switch (err.name) {
       case "PrismaClientInitializationError":
         err = handleInitDbErr();
